@@ -43,6 +43,24 @@ app.post('/animal', function (req, res){
   res.send('Item adicionado com sucesso: ' + novoItem)
   })
 
+  // Endpoint Update [PUT] /animal/:id
+  app.put('/animal/:id', function (req, res){
+    // Acessamos o ID dos parâmetros de rota
+    const id = req.params.id
+
+    // Acessamos o BOdy da requisição
+    const body = req.body
+
+    // Acessamos a propriedade 'nome' do body
+    const novoItem = body.nome
+
+    // Atualizamos na lista o novoItem pelo ID -1
+    lista[id - 1] = novoItem
+
+    // Enviamos uma mensagem de sucesso
+    res.send('Item atualizado com sucesso: ' + id + ' - ' + novoItem)
+  })
+
 app.listen(3000, function (req, res){
   console.log("Carregando http://localhost:3000/")
 })
