@@ -9,7 +9,7 @@ const lista = ['Cachorro','Gato','Lagarta']
 
 //endpoint Read All [GET] /animal
 app.get('/animal', function (req,res){
-  res.send(lista)
+  res.send(lista.filter(Boolean))
 })
 
 // Endpoint Read By ID [GET] /animal/:id
@@ -59,6 +59,18 @@ app.post('/animal', function (req, res){
 
     // Enviamos uma mensagem de sucesso
     res.send('Item atualizado com sucesso: ' + id + ' - ' + novoItem)
+  })
+
+  // Endpoint Delete [DELETE]  /animal/:id
+  app.delete('/animal/:id', function (req, res){
+    // Acessando o parâmetro de rota
+    const id = req.params.id
+
+    // Remover o item da lista usando ID - 1
+    delete lista[id - 1]
+
+    // Enviamos uma mensagem de sucesso
+    res.send('Item removido com sucesso: ' + id)
   })
 
 app.listen(3000, function (req, res){
